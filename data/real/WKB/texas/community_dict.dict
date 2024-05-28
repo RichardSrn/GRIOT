@@ -1,0 +1,6 @@
+community_dict = {
+	0 : student,
+	1 : course,
+	2 : staff,
+	3 : faculty,
+}

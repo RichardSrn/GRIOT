@@ -1,0 +1,13 @@
+nb_vertices: 19717
+nb_edges: 44324
+nb_features: 499
+edges_proba: {'within': 0.0005127497573575589, 'between': 7.006702916468294e-05}
+avg_degree: 4.496018664096972
+components: 1
+nb_community: 3
+community_size: [4103, 7739, 7875]
+diameter: 18
+modularity: 0.4317708840259964
+inertia: {'within': 0.9842417983167995, 'between': 0.015758201683200475}
+clustering_coefficient: {'average': 0.054, 'random': 0.0}
+homophily: {'expected': 1.0000507202272266, 'actual': 1.0, 'ratio': 0.9999492823451843, 'community-wise': 0.8023869686851367}

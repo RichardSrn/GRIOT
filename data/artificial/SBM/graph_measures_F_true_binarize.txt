@@ -1,0 +1,13 @@
+nb_vertices: 1500
+nb_edges: 1529
+edges_proba: {'within': 0.0029833750267292884, 'between': 0.0005040069229630173}
+avg_degree: 2.038666666666667
+components: 1
+nb_community: 4
+community_size: [150, 220, 380, 750]
+diameter: 48
+modularity: 0.41899235234560434
+inertia: {'within': 0.42022043909774437, 'between': 0.5797795609022558}
+clustering_coefficient: {'average': 0.0, 'random': 0.0}
+homophily: {'expected': 0.5142317100289081, 'actual': 0.6867233485938522, 'ratio': 1.3354356318385097}
+avg_shortest_pass: 19.595485879475206
