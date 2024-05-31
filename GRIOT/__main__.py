@@ -38,12 +38,12 @@ torch.set_default_dtype(torch.double)
               {
               basic,  # Basic model adapted from Muzellec et al.
               rr,  # Algorithm3 adapted from Muzellec et al. (does not run with real graphs)
-              gcn,  # GCN imputer (for WaGNA)
-              gat,  # GATv2 imputer (for WaGNA)
-              gct,  # GCT (Graph Convolution Transformer) imputer (for WaGNA)
+              gcn,  # GCN imputer (for GRIOT)
+              gat,  # GATv2 imputer (for GRIOT)
+              gct,  # GCT (Graph Convolution Transformer) imputer (for GRIOT)
               fp, # Feature Propagation from Rossi et al.
               }.
-              Required with -W \in \{wagna, wagnamulti, wagna2, pagnn, muzellec\}.
+              Required with -W \in \{griot, griotmulti, griot2, pagnn, muzellec\}.
               Only basic and rr are available with -W muzellec.
               >
               """,
@@ -88,9 +88,9 @@ torch.set_default_dtype(torch.double)
               muzellec, # run baseline Muzellec et al.
               rossi, # run baseline features propagation (Rossi et al.)
               pagnn, # run PaGNN
-              wagna, # run WaGNA
-              wagnamulti, # run WaGNA multiple views (3 views for now : structure, attributes, spectral)
-              wagna2, # run WaGNAv2
+              griot, # run GRIOT
+              griotmulti, # run GRIOT multiple views (3 views for now : structure, attributes, spectral)
+              griot2, # run GRIOTv2
               }
               """,
               type=str,
@@ -159,50 +159,50 @@ torch.set_default_dtype(torch.double)
               """,
               type=str,
               show_default=True)
-@click.option('--dir-wagna',
+@click.option('--dir-griot',
               default="",
               help="""\b
-              Directory path to wagna file.
+              Directory path to griot file.
               >
               """,
               type=str,
               show_default=True)
-@click.option('--file-wagna',
+@click.option('--file-griot',
               default="skip",
               help="""\b
-              File name of wagna file.
+              File name of griot file.
               >
               """,
               type=str,
               show_default=True)
-@click.option('--dir-wagnamulti',
+@click.option('--dir-griotmulti',
               default="",
               help="""\b
-              Directory path to wagna_multi file.
+              Directory path to griot_multi file.
               >
               """,
               type=str,
               show_default=True)
-@click.option('--file-wagnamulti',
+@click.option('--file-griotmulti',
               default="skip",
               help="""\b
-              File name of wagna_multi file.
+              File name of griot_multi file.
               >
               """,
               type=str,
               show_default=True)
-@click.option('--dir-wagna2',
+@click.option('--dir-griot2',
               default="",
               help="""\b
-              Directory path to wagna2 file.
+              Directory path to griot2 file.
               >
               """,
               type=str,
               show_default=True)
-@click.option('--file-wagna2',
+@click.option('--file-griot2',
               default="skip",
               help="""\b
-              File name of wagna2 file.
+              File name of griot2 file.
               >
               """,
               type=str,
@@ -498,12 +498,12 @@ def main_(
         file_rossi=None,
         dir_pagnn=None,
         file_pagnn=None,
-        dir_wagna=None,
-        file_wagna=None,
-        dir_wagnamulti=None,
-        file_wagnamulti=None,
-        dir_wagna2=None,
-        file_wagna2=None,
+        dir_griot=None,
+        file_griot=None,
+        dir_griotmulti=None,
+        file_griotmulti=None,
+        dir_griot2=None,
+        file_griot2=None,
         normalization=None,
         mecha=None,
         opt=None,

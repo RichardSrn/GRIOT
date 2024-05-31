@@ -136,7 +136,7 @@ cfg.work_dir = os.getcwd()
 # -----------------------------
 class Args:
     def __init__(self):
-        self.cfg_file = "./WaGNA/model_imputers/grit_requierements/GRIT_config.yaml"
+        self.cfg_file = "./GRIOT/model_imputers/grit_requierements/GRIT_config.yaml"
         self.repeat = 1
         self.seed = 0
         self.run_multiple_splits = []

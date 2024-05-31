@@ -15,16 +15,16 @@ from torch_geometric.graphgym.register import register_node_encoder
 # from grit.encoder.equivstable_laplace_pos_encoder import EquivStableLapPENodeEncoder
 
 
-from WaGNA.model_imputers.grit_requierements.encoder.ast_encoder import ASTNodeEncoder
-from WaGNA.model_imputers.grit_requierements.encoder.kernel_pos_encoder import RWSENodeEncoder, \
+from GRIOT.model_imputers.grit_requierements.encoder.ast_encoder import ASTNodeEncoder
+from GRIOT.model_imputers.grit_requierements.encoder.kernel_pos_encoder import RWSENodeEncoder, \
     HKdiagSENodeEncoder, ElstaticSENodeEncoder
-from WaGNA.model_imputers.grit_requierements.encoder.laplace_pos_encoder import LapPENodeEncoder
-from WaGNA.model_imputers.grit_requierements.encoder.ppa_encoder import PPANodeEncoder
-from WaGNA.model_imputers.grit_requierements.encoder.signnet_pos_encoder import SignNetNodeEncoder
-from WaGNA.model_imputers.grit_requierements.encoder.voc_superpixels_encoder import VOCNodeEncoder
-from WaGNA.model_imputers.grit_requierements.encoder.type_dict_encoder import TypeDictNodeEncoder
-from WaGNA.model_imputers.grit_requierements.encoder.linear_node_encoder import LinearNodeEncoder
-from WaGNA.model_imputers.grit_requierements.encoder.equivstable_laplace_pos_encoder import EquivStableLapPENodeEncoder
+from GRIOT.model_imputers.grit_requierements.encoder.laplace_pos_encoder import LapPENodeEncoder
+from GRIOT.model_imputers.grit_requierements.encoder.ppa_encoder import PPANodeEncoder
+from GRIOT.model_imputers.grit_requierements.encoder.signnet_pos_encoder import SignNetNodeEncoder
+from GRIOT.model_imputers.grit_requierements.encoder.voc_superpixels_encoder import VOCNodeEncoder
+from GRIOT.model_imputers.grit_requierements.encoder.type_dict_encoder import TypeDictNodeEncoder
+from GRIOT.model_imputers.grit_requierements.encoder.linear_node_encoder import LinearNodeEncoder
+from GRIOT.model_imputers.grit_requierements.encoder.equivstable_laplace_pos_encoder import EquivStableLapPENodeEncoder
 
 def concat_node_encoders(encoder_classes, pe_enc_names):
     """

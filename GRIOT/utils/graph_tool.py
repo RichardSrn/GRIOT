@@ -223,9 +223,9 @@ def produce_NA(X, adjacency_matrix, p_miss, preserve_first_column: bool = False,
     else:
         communities = None
 
-    file_name = f"./WaGNA/masks/{cfg.graph_name}_miss{p_miss}_{mecha}_{opt}_seed{seed}.npy"
+    file_name = f"./GRIOT/masks/{cfg.graph_name}_miss{p_miss}_{mecha}_{opt}_seed{seed}.npy"
 
-    # if the file "./WaGNA/masks/{cfg.graph_name}_{mecha}_{opt}_{seed}.npy" already exists, load it
+    # if the file "./GRIOT/masks/{cfg.graph_name}_{mecha}_{opt}_{seed}.npy" already exists, load it
     if os.path.exists(file_name):
         mask = torch.from_numpy(np.load(file_name))
         cfg.logger.info(f"file '{file_name}' loaded.")
@@ -258,10 +258,10 @@ def produce_NA(X, adjacency_matrix, p_miss, preserve_first_column: bool = False,
             X = torch.cat((communities.unsqueeze(1), X), dim=1)
             mask = torch.cat((torch.zeros((mask.shape[0], 1)), mask), dim=1)
 
-        # save mask to "./WaGNA/masks/{cfg.graph_name}_{mecha}_{opt}_{seed}.npy"
+        # save mask to "./GRIOT/masks/{cfg.graph_name}_{mecha}_{opt}_{seed}.npy"
         # check if "./masks" directory exists, if not create it
-        if not os.path.exists("./WaGNA/masks"):
-            os.makedirs("./WaGNA/masks")
+        if not os.path.exists("./GRIOT/masks"):
+            os.makedirs("./GRIOT/masks")
         np.save(file_name, mask.numpy())
         cfg.logger.info(f"File '{file_name}' saved")
         loaded=False

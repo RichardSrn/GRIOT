@@ -229,7 +229,7 @@ class Threads():
             "save_steps_path": [save_steps_path]
         })], ignore_index=True)
 
-    def wagna2_thread(self,
+    def griot2_thread(self,
                    model,
                    epsilon,
                    batch_size,

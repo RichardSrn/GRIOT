@@ -7,7 +7,7 @@ from torch_geometric.utils.num_nodes import maybe_num_nodes
 from torch_scatter import scatter, scatter_max, scatter_add
 
 # from grit.utils import negate_edge_index
-# from WaGNA.model_imputers.grit_requierements.utils import negate_edge_index
+# from GRIOT.model_imputers.grit_requierements.utils import negate_edge_index
 from torch_geometric.graphgym.register import *
 import opt_einsum as oe
 

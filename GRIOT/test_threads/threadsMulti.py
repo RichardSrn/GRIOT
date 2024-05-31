@@ -224,7 +224,7 @@ class ThreadsMulti():
             "save_steps_path": [save_steps_path]
         })], ignore_index=True)
 
-    def wagna2_thread_multi(self,
+    def griot2_thread_multi(self,
                          model,
                          epsilon,
                          batch_size,

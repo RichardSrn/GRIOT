@@ -69,35 +69,35 @@ class RunTest:
             if not cfg.path_save_pagnn.endswith("classifiers_scores.json") and not cfg.skip_classification:
                 self.classify(which="pagnn")
 
-        elif not "skip" in cfg.path_save_wagna:
-            if cfg.path_save_wagna.endswith(".json"):
-                cfg.paths_save["path_save_wagna"] = cfg.path_save_wagna
+        elif not "skip" in cfg.path_save_griot:
+            if cfg.path_save_griot.endswith(".json"):
+                cfg.paths_save["path_save_griot"] = cfg.path_save_griot
             else:
-                self.impute(which="wagna")
-            if not cfg.path_save_wagna.endswith("classifiers_scores.json") and not cfg.skip_classification:
-                self.classify(which="wagna")
+                self.impute(which="griot")
+            if not cfg.path_save_griot.endswith("classifiers_scores.json") and not cfg.skip_classification:
+                self.classify(which="griot")
             else:
-                cfg.paths_save["path_save_wagna_classifier"] = cfg.path_save_wagna
+                cfg.paths_save["path_save_griot_classifier"] = cfg.path_save_griot
 
-        elif not "skip" in cfg.path_save_wagnamulti:
-            if cfg.path_save_wagnamulti.endswith(".json"):
-                cfg.paths_save["path_save_wagnamulti"] = cfg.path_save_wagnamulti
+        elif not "skip" in cfg.path_save_griotmulti:
+            if cfg.path_save_griotmulti.endswith(".json"):
+                cfg.paths_save["path_save_griotmulti"] = cfg.path_save_griotmulti
             else:
-                self.impute(which="wagnamulti")
-            if not cfg.path_save_wagnamulti.endswith("classifiers_scores.json") and not cfg.skip_classification:
-                self.classify(which="wagnamulti")
+                self.impute(which="griotmulti")
+            if not cfg.path_save_griotmulti.endswith("classifiers_scores.json") and not cfg.skip_classification:
+                self.classify(which="griotmulti")
             else:
-                cfg.paths_save["path_save_wagnamulti_classifier"] = cfg.path_save_wagnamulti
+                cfg.paths_save["path_save_griotmulti_classifier"] = cfg.path_save_griotmulti
 
-        elif not "skip" in cfg.path_save_wagna2:
-            if cfg.path_save_wagna2.endswith(".json"):
-                cfg.paths_save["path_save_wagna2"] = cfg.path_save_wagna2
+        elif not "skip" in cfg.path_save_griot2:
+            if cfg.path_save_griot2.endswith(".json"):
+                cfg.paths_save["path_save_griot2"] = cfg.path_save_griot2
             else:
-                self.impute(which="wagna2")
-            if not cfg.path_save_wagna2.endswith("classifiers_scores.json") and not cfg.skip_classification:
-                self.classify(which="wagna2")
+                self.impute(which="griot2")
+            if not cfg.path_save_griot2.endswith("classifiers_scores.json") and not cfg.skip_classification:
+                self.classify(which="griot2")
             else:
-                cfg.paths_save["path_save_wagna2_classifier"] = cfg.path_save_wagna2
+                cfg.paths_save["path_save_griot2_classifier"] = cfg.path_save_griot2
 
         else:
             raise ValueError("No path to save results")
@@ -109,18 +109,18 @@ class RunTest:
     def plot_table(self, path_save=""):
         cfg.logger.info("plots and tables")
         plot_results(path_save=path_save if path_save else cfg.UNIQUE,
-                     path_results=cfg.paths_save["path_save_wagna_classifier"],
+                     path_results=cfg.paths_save["path_save_griot_classifier"],
                      path_baselines=cfg.paths_save["path_save_weak"],
                      path_baseline_muzellec=cfg.paths_save["path_save_muzellec"])
         table_results(path_save=path_save if path_save else cfg.UNIQUE,
-                      path_results=cfg.paths_save["path_save_wagna_classifier"],
+                      path_results=cfg.paths_save["path_save_griot_classifier"],
                       path_baselines=cfg.paths_save["path_save_weak"],
                       path_baseline_muzellec=cfg.paths_save["path_save_muzellec"])
 
     @timer
     def impute(self, which=""):
         """
-        :param which: \in \{"weak", "muzellec", "wagna", "wagnamulti", "wagna2", "pagnn"\}
+        :param which: \in \{"weak", "muzellec", "griot", "griotmulti", "griot2", "pagnn"\}
         """
         if which.lower() == "weak":
             cfg.logger.info('BASELINES WEAK')
@@ -137,29 +137,29 @@ class RunTest:
             cfg.logger.info('BASELINE PaGNN')
             assert cfg.model in ["rand", "fp", "gcn"], f"model should be in rand, or fp, or gcn but is {cfg.model}"
             cfg.paths_save["path_save_pagnn"] = baseline_pagnn()
-        elif which.lower() == "wagna":
+        elif which.lower() == "griot":
             assert cfg.model in {"basic", "rr", "gcn", "gat", "gct"}, \
                 f"model should be in {{basic, rr, gcn, gat, gct}} but is {cfg.model}"
             cfg.logger.info('TESTS model ' + cfg.model.upper())
-            cfg.paths_save["path_save_wagna"] = train_test()
-        elif which.lower() == "wagnamulti":
+            cfg.paths_save["path_save_griot"] = train_test()
+        elif which.lower() == "griotmulti":
             assert cfg.model in {"basic", "rr", "gcn", "gat", "gct"}, \
                 f"model should be in {{basic, rr, gcn, gat, gct}} but is {cfg.model}"
             cfg.logger.info('TESTS MULTI model ' + cfg.model.upper())
-            cfg.paths_save["path_save_wagnamulti"] = train_test_multi()
-        elif which.lower() == "wagna2":
+            cfg.paths_save["path_save_griotmulti"] = train_test_multi()
+        elif which.lower() == "griot2":
             assert self.model in {"basic", "rr", "gcn", "gat", "gct"}, \
                 f"model should be in {{basic, rr, gcn, gat, gct}} but is {cfg.model}"
             cfg.logger.info('TESTS model ' + cfg.model.upper())
-            cfg.paths_save["path_save_wagna2"] = train_test2()
+            cfg.paths_save["path_save_griot2"] = train_test2()
         else:
             raise ValueError(
-                f"which should be in {{weak, muzellec, rossi, pagnn, wagna, wagnamulti, wagna2}} but is {which}")
+                f"which should be in {{weak, muzellec, rossi, pagnn, griot, griotmulti, griot2}} but is {which}")
 
     @timer
     def classify(self, which=""):
         """
-        :param which: \in \{"weak", "muzellec", "wagna"\}
+        :param which: \in \{"weak", "muzellec", "griot"\}
         :return:
         """
         if which.lower() == "muzellec":
@@ -178,28 +178,28 @@ class RunTest:
             cfg.logger.info('CLASSIFIER WEAK')
             cfg.paths_save["path_save_weak"] = classifiers_scores(path_json=cfg.paths_save["path_save_weak"],
                                                                   final_only=False, )
-        elif which.lower() == "wagna":
+        elif which.lower() == "griot":
             cfg.logger.info('CLASSIFIER TEST')
             cfg.paths_save[
-                "path_save_wagna_classifier"
-            ] = classifiers_scores(path_json=cfg.paths_save["path_save_wagna"],
+                "path_save_griot_classifier"
+            ] = classifiers_scores(path_json=cfg.paths_save["path_save_griot"],
                                    final_only=True, )
-        elif which.lower() == "wagnamulti":
+        elif which.lower() == "griotmulti":
             cfg.logger.info('CLASSIFIER TEST MULTI')
             cfg.paths_save[
-                "path_save_wagnamulti_classifier"
-            ] = classifiers_scores(path_json=cfg.paths_save["path_save_wagnamulti"],
+                "path_save_griotmulti_classifier"
+            ] = classifiers_scores(path_json=cfg.paths_save["path_save_griotmulti"],
                                    final_only=True, )
-        elif which.lower() == "wagna2":
+        elif which.lower() == "griot2":
             cfg.logger.info('CLASSIFIER TEST')
             cfg.paths_save[
-                "path_save_wagna2_classifier"
-            ] = classifiers_scores(path_json=cfg.paths_save["path_save_wagna2"],
+                "path_save_griot2_classifier"
+            ] = classifiers_scores(path_json=cfg.paths_save["path_save_griot2"],
                                    final_only=True, )
 
         else:
             raise ValueError(
-                f"which should be in {{weak, muzellec, rossi, pagnn, wagna, wagnamulti, wagna2}} but is {which}")
+                f"which should be in {{weak, muzellec, rossi, pagnn, griot, griotmulti, griot2}} but is {which}")
 
 
 @timer
@@ -207,29 +207,29 @@ def main():
     assert sum(
         (cfg.file_weak == "skip",
          cfg.file_muzellec == "skip",
-         cfg.file_wagna == "skip",
-         cfg.file_wagna2 == "skip",
+         cfg.file_griot == "skip",
+         cfg.file_griot2 == "skip",
          cfg.file_rossi == "skip",
          cfg.file_pagnn == "skip",
-         cfg.file_wagnamulti == "skip")) >= 6, 'At most one of the following can be different from skip : --file_weak,' \
-                                               ' --file_muzellec, --file_rossi, --file_pagnn, --file_wagna, --file_wagnamulti.' \
+         cfg.file_griotmulti == "skip")) >= 6, 'At most one of the following can be different from skip : --file_weak,' \
+                                               ' --file_muzellec, --file_rossi, --file_pagnn, --file_griot, --file_griotmulti.' \
                                                ' Here --file_weak = {}, --file_muzellec = {}, --file_rossi = {}, ' \
-                                               '--file_pagnn = {}, --file_wagna = {}, --file_wagna_multi = {}, ' \
-                                               '--file_wagna2 = {}.'.format(
+                                               '--file_pagnn = {}, --file_griot = {}, --file_griot_multi = {}, ' \
+                                               '--file_griot2 = {}.'.format(
         cfg.file_weak,
         cfg.file_muzellec,
         cfg.file_rossi,
         cfg.file_pagnn,
-        cfg.file_wagna,
-        cfg.file_wagnamulti,
-        cfg.file_wagna2,
+        cfg.file_griot,
+        cfg.file_griotmulti,
+        cfg.file_griot2,
     )
 
     if sum((cfg.file_weak == "skip",
             cfg.file_muzellec == "skip",
-            cfg.file_wagna == "skip",
-            cfg.file_wagnamulti == "skip",
-            cfg.file_wagna2 == "skip",
+            cfg.file_griot == "skip",
+            cfg.file_griotmulti == "skip",
+            cfg.file_griot2 == "skip",
             cfg.file_rossi == "skip",
             cfg.file_pagnn == "skip")) == 7:
         assert cfg.which != None, "if all files are skipped, --which must be specified"
@@ -238,18 +238,18 @@ def main():
             cfg.file_weak = "None"
         elif cfg.which == "muzellec":
             cfg.file_muzellec = "None"
-        elif cfg.which == "wagna" or cfg.which == "ours":
-            cfg.file_wagna = "None"
-        elif cfg.which == "wagnamulti" or cfg.which == "oursmulti":
-            cfg.file_wagnamulti = "None"
-        elif cfg.which == "wagna2":
-            cfg.file_wagna2 = "None"
+        elif cfg.which == "griot" or cfg.which == "ours":
+            cfg.file_griot = "None"
+        elif cfg.which == "griotmulti" or cfg.which == "oursmulti":
+            cfg.file_griotmulti = "None"
+        elif cfg.which == "griot2":
+            cfg.file_griot2 = "None"
         elif cfg.which == "rossi":
             cfg.file_rossi = "None"
         elif cfg.which == "pagnn":
             cfg.file_pagnn = "None"
         else:
-            raise ValueError(f"which must be in {{weak, muzellec, rossi, pagnn, wagna, wagnamulti, wagna2}}"
+            raise ValueError(f"which must be in {{weak, muzellec, rossi, pagnn, griot, griotmulti, griot2}}"
                              f" but is f{cfg.which}")
 
     if cfg.model == "rr":
@@ -283,9 +283,9 @@ def main():
 
     cfg.path_save_weak = os.path.join(cfg.dir_weak, cfg.file_weak)
     cfg.path_save_muzellec = os.path.join(cfg.dir_muzellec, cfg.file_muzellec)
-    cfg.path_save_wagna = os.path.join(cfg.dir_wagna, cfg.file_wagna)
-    cfg.path_save_wagnamulti = os.path.join(cfg.dir_wagnamulti, cfg.file_wagnamulti)
-    cfg.path_save_wagna2 = os.path.join(cfg.dir_wagna2, cfg.file_wagna2)
+    cfg.path_save_griot = os.path.join(cfg.dir_griot, cfg.file_griot)
+    cfg.path_save_griotmulti = os.path.join(cfg.dir_griotmulti, cfg.file_griotmulti)
+    cfg.path_save_griot2 = os.path.join(cfg.dir_griot2, cfg.file_griot2)
     cfg.path_save_rossi = os.path.join(cfg.dir_rossi, cfg.file_rossi)
 
     cfg.path_save_pagnn = os.path.join(cfg.dir_pagnn, cfg.file_pagnn)
@@ -306,11 +306,11 @@ def main():
     #     cfg.graph_name = cfg.graph_name.split(",")
 
     cfg.UNIQUE = f"./output/"
-    if cfg.file_wagna != "skip":
+    if cfg.file_griot != "skip":
         cfg.UNIQUE = os.path.join(cfg.UNIQUE, "TEST")
-    elif cfg.file_wagnamulti != "skip":
+    elif cfg.file_griotmulti != "skip":
         cfg.UNIQUE = os.path.join(cfg.UNIQUE, "TESM")
-    elif cfg.file_wagna2 != "skip":
+    elif cfg.file_griot2 != "skip":
         cfg.UNIQUE = os.path.join(cfg.UNIQUE, "TES2")
     elif cfg.file_muzellec != "skip":
         cfg.UNIQUE = os.path.join(cfg.UNIQUE, "MUZE")
@@ -412,12 +412,12 @@ def main():
     cfg.p_miss_s = [float(x) for x in cfg.pmiss.split(",")]
 
     if cfg.alphas is not None:
-        if cfg.file_wagna != "skip" or (cfg.file_pagnn != "skip" and cfg.model == "gcn") or cfg.file_wagna2 != 2:
+        if cfg.file_griot != "skip" or (cfg.file_pagnn != "skip" and cfg.model == "gcn") or cfg.file_griot2 != 2:
             if ',' in cfg.alphas:
                 cfg.alphas = [float(x) for x in cfg.alphas.split(",")]
             else:
                 cfg.alphas = [float(cfg.alphas)]
-        elif cfg.file_wagnamulti != "skip":
+        elif cfg.file_griotmulti != "skip":
             cfg.alphas = [a for a in cfg.alphas.split("_")]
             cfg.alphas = [tuple(float(a) for a in alpha.split(',')) for alpha in cfg.alphas]
             # run assertion check: the sum of each tuple should be equal to 1
