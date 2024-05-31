@@ -1,10 +1,10 @@
-# Reconstructing the Unseen: Attributed Graph Imputation with Optimal Transport
+# Reconstructing the Unseen: GRIOT for Attributed Graph Imputation with Optimal Transport
 
 This code is the implementation of the paper **Reconstructing the Unseen: Attributed Graph Imputation with Optimal Transport**.
 
 The paper is under review for ECMLPKDD2024.
 
-The implementation here features our proposed framework multi-**Wa**ssertsein for imputation of **G**raph with **N**ode **A**ttributes : <tt>WaGNA</tt>.
+The implementation here features our proposed framework  <tt>GRIOT</tt> for Attributed Graph Imputation with Optimal Transport.
 
 # General Information
 
@@ -37,7 +37,7 @@ To download or synthesize the datasets: `python -m WaGNA --make-data`.
 - `--which pagnn --model {rand,fp,gcn} --pmiss 0.2,0.5,0.8 --mecha {MCAR,MNAR} --opt {None,selfmasked} -G {sbm,cornell,texas,wisconsin,cora,citeseer,pubmed} --nr 5 --batch-size 16 --np 8`
 
 ## Examples of use with different scenarios :
-- WaGNA with 20%, 50%, and 80% missing data, MCAR mechanism, Cora datasets, on 375 epochs with a report of MAE and RMSE every 25 epochs, batch_size=16, n_pairs=8, and 5 runs (for averaging the results):
+- GRIOT with 20%, 50%, and 80% missing data, MCAR mechanism, Cora datasets, on 375 epochs with a report of MAE and RMSE every 25 epochs, batch_size=16, n_pairs=8, and 5 runs (for averaging the results):
 
 `python -m WaGNA --which wagna --model gcn --pmiss 0.2,0.5,0.8 --mecha MCAR -G cora --epochs 375 --report-interval 25 --nr 5 --batch-size 16 --np 8`
 
