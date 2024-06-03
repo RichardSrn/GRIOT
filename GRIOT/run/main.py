@@ -354,9 +354,14 @@ def main():
         f"{cfg.prefix}_{cfg.graph_name}"
     )
 
+    # print pip freeze
+    import subprocess
+    print(subprocess.run(["pip", "freeze"], stdout=subprocess.PIPE))
+    exit()
+
     if cfg.restructure == "True":
         cfg.restructure = True
-    elif cfg.restructure == "False":
+    elif cfg.restructure == "False" or cfg.restructure == "auto":
         cfg.restructure = False
         cfg.restruct_iters = None
         cfg.restruct_thld = None
